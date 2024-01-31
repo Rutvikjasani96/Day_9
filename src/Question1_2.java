@@ -7,7 +7,7 @@ public class Question1_2 {
         int maxSum=0;
         int[] ps = new int[array.length];
 //        buildPSArray(array,ps);
-//        maxSum = maxSumSubarray(array,s,e,k,ps);
+//        maxSum = maxSumSubarray(array,s,e,k,ps); // using Prefix Sum
         maxSum = maxSumSubarrayOptimized(array,k,s,e);
         System.out.println("Maxsum of Subarray : "+maxSum);
     }
@@ -26,30 +26,30 @@ public class Question1_2 {
         }
         return maxSum;
     }
-//    static void buildPSArray(int[] array,int[] ps){
-//        ps[0]=array[0];
-//        for(int i=1;i<array.length;i++){
-//            ps[i] = ps[i-1] + array[i];
-//        }
-//    }
-//    static int maxSumSubarray(int[] array,int s,int e,int k,int[] ps){
-//        int maxSum=Integer.MIN_VALUE;
-//        int sum=0;
-//        while(s<= array.length-k){
-//            sum=0;
-////            for(int i=s;i<=e;i++){
-////                sum = sum + array[i];
-////            }
-////            Let's Optimises
-//            if(s!=0) {
-//                sum = ps[e] - ps[s - 1];
-//            }else{
-//                sum = ps[e];
+    static void buildPSArray(int[] array,int[] ps){
+        ps[0]=array[0];
+        for(int i=1;i<array.length;i++){
+            ps[i] = ps[i-1] + array[i];
+        }
+    }
+    static int maxSumSubarray(int[] array,int s,int e,int k,int[] ps){
+        int maxSum=Integer.MIN_VALUE;
+        int sum=0;
+        while(s<= array.length-k){
+            sum=0;
+//            for(int i=s;i<=e;i++){
+//                sum = sum + array[i];
 //            }
-//            maxSum = Math.max(maxSum,sum);
-//            s++;
-//            e++;
-//        }
-//        return maxSum;
-//    }
+//            Let's Optimises
+            if(s!=0) {
+                sum = ps[e] - ps[s - 1];
+            }else{
+                sum = ps[e];
+            }
+            maxSum = Math.max(maxSum,sum);
+            s++;
+            e++;
+        }
+        return maxSum;
+    }
 }
